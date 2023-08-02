@@ -1,0 +1,27 @@
+/* reset start */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+/* reset end */
+
+/* header */
+header {
+  background-color: #d35400;
+}
+
+.container-title h1 {
+  font-size: 1rem;
+  padding: 1rem;
+  color: #f5f6fa;
+  cursor: pointer;
+  transition: all 0.2s;
+  width: 7rem;
+  height: 3rem;
+}
+
+.container-title h1:hover {
+  background-color: #e67e22;
+  border-radius: 0.5rem;
+}
