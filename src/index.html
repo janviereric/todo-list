@@ -4,14 +4,66 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Todo List</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Mulish:wght@300;400;700&family=Roboto+Condensed:wght@400;700&display=swap"
+      rel="stylesheet"
+    />
   </head>
   <body>
     <header>
       <div class="container-manu-header">
-        <div class="container-title">
-          <h1>Todo List</h1>
+        <div class="container-title-logo">
+          <h1 class="text-title-logo">Todo List</h1>
         </div>
       </div>
     </header>
+    <main>
+      <fieldset class="container-todo-list">
+        <legend class="title-todo-list">Ma Liste de tâches</legend>
+        <form>
+          <input type="text" />
+          <button class="add-button">Ajouter</button>
+        </form>
+        <ul>
+          <fieldset class="container-todo">
+            <legend class="title-todo">Ma tâche n°1 :</legend>
+            <li>
+              <span></span>
+              <p>Je suis un exemple de todo</p>
+              <div class="container-edit-delete-button">
+                <button class="edit-button">Editer</button>
+                <button class="delete-button">Supprimer</button>
+              </div>
+            </li>
+          </fieldset>
+
+          <fieldset class="container-todo">
+            <legend class="title-todo">Ma tâche n°2 :</legend>
+            <li>
+              <span></span>
+              <p>Je suis un second exemple de todo</p>
+              <div class="container-edit-delete-button">
+                <button class="edit-button">Editer</button>
+                <button class="delete-button">Supprimer</button>
+              </div>
+            </li>
+          </fieldset>
+
+          <fieldset class="container-todo">
+            <legend class="title-todo">Ma tâche n°3 :</legend>
+            <li>
+              <span></span>
+              <p>Je suis un troisième exemple de todo</p>
+              <div class="container-edit-delete-button">
+                <button class="edit-button">Editer</button>
+                <button class="delete-button">Supprimer</button>
+              </div>
+            </li>
+          </fieldset>
+        </ul>
+      </fieldset>
+    </main>
   </body>
 </html>

@@ -3,25 +3,146 @@
   margin: 0;
   padding: 0;
   box-sizing: border-box;
+  font-family: "Roboto Condensed", sans-serif;
+  letter-spacing: 0.1rem;
+}
+
+li {
+  list-style-type: none;
 }
 /* reset end */
 
-/* header */
+/* body start */
+body {
+  font-size: 10px;
+}
+/* body end */
+
+/* header start */
 header {
   background-color: #d35400;
-}
-
-.container-title h1 {
-  font-size: 1rem;
-  padding: 1rem;
-  color: #f5f6fa;
-  cursor: pointer;
-  transition: all 0.2s;
-  width: 7rem;
   height: 3rem;
 }
 
-.container-title h1:hover {
-  background-color: #e67e22;
-  border-radius: 0.5rem;
+.container-title-logo {
+  display: flex;
+  justify-content: center;
 }
+
+.text-title-logo {
+  font-size: 1rem;
+  color: #f5f6fa;
+  cursor: pointer;
+  padding: 0.8rem;
+  margin-top: 0.2rem;
+}
+
+.text-title-logo:hover {
+  transition: all 0.2s;
+  background-color: #e67e22;
+  border-radius: 0.2rem;
+}
+/* header end */
+
+/* main start*/
+main {
+  height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+/* main end*/
+
+/* todo start */
+.container-todo-list {
+  border: 0.1rem solid black;
+  padding: 1rem;
+}
+
+legend {
+  margin-left: auto;
+  margin-right: auto;
+  font-weight: bold;
+  padding: 1rem;
+}
+
+.title-todo-list {
+  color: #d35400;
+  font-size: 1.2rem;
+}
+
+form {
+  display: flex;
+  justify-content: space-around;
+}
+
+input {
+  margin-left: 1rem;
+  margin-right: 1rem;
+  margin-bottom: 3rem;
+  padding: 0.4rem 1rem;
+  outline: 0;
+  border: 0.1rem solid #4444;
+  border-radius: 0.2rem;
+  flex: 1;
+}
+
+.container-todo {
+  margin-bottom: 2rem;
+  border: 0.1rem solid #333;
+  padding: 0.5rem;
+}
+
+.title-todo {
+  font-size: 1rem;
+}
+
+li {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+li p {
+  margin-bottom: 1rem;
+  font-size: 1rem;
+}
+/* todo end */
+
+/* button start */
+button {
+  border: none;
+  background-color: #d35400;
+  color: #f5f6fa;
+  font-weight: bold;
+  padding: 0.5rem;
+  border-radius: 0.2rem;
+  height: 2rem;
+}
+
+button:hover {
+  background-color: #e67e22;
+  transition: all 0.2s;
+  cursor: pointer;
+}
+
+.container-edit-delete-button {
+  display: flex;
+  justify-content: space-evenly;
+  width: 20rem;
+}
+
+.add-button {
+  margin-right: 1rem;
+}
+
+.edit-button {
+  margin-bottom: 1rem;
+  width: 7rem;
+}
+
+.delete-button {
+  width: 7rem;
+}
+/* button end */
