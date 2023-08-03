@@ -3,13 +3,20 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Todo List</title>
+    <!--  font family -->
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link
       href="https://fonts.googleapis.com/css2?family=Mulish:wght@300;400;700&family=Roboto+Condensed:wght@400;700&display=swap"
       rel="stylesheet"
     />
+    <!-- fontawesome -->
+    <script
+      src="https://kit.fontawesome.com/5a38324862.js"
+      crossorigin="anonymous"
+    ></script>
+    <link rel="icon" type="image/x-icon" href="src/img/favicon.ico" />
+    <title>Todo List</title>
   </head>
   <body>
     <header>
@@ -28,7 +35,9 @@
         </form>
         <ul>
           <fieldset class="container-todo">
-            <legend class="title-todo">Ma tâche n°1 :</legend>
+            <legend class="title-todo">
+              Ma tâche n°<span class="number">1</span> :
+            </legend>
             <li>
               <span></span>
               <p>Je suis un exemple de todo</p>
@@ -40,7 +49,9 @@
           </fieldset>
 
           <fieldset class="container-todo">
-            <legend class="title-todo">Ma tâche n°2 :</legend>
+            <legend class="title-todo">
+              Ma tâche n°<span class="number">2</span> :
+            </legend>
             <li>
               <span></span>
               <p>Je suis un second exemple de todo</p>
@@ -52,7 +63,9 @@
           </fieldset>
 
           <fieldset class="container-todo">
-            <legend class="title-todo">Ma tâche n°3 :</legend>
+            <legend class="title-todo">
+              Ma tâche n°<span class="number">3</span> :
+            </legend>
             <li>
               <span></span>
               <p>Je suis un troisième exemple de todo</p>
@@ -65,5 +78,15 @@
         </ul>
       </fieldset>
     </main>
+
+    <footer>
+      <div class="container-copyright-logo">
+        <p>
+          <img src="./src/img/janviereric.jpg" alt="JanvierEric" />
+          copyright <i class="fa-regular fa-copyright"></i> 2023 -
+          <span class="j">J</span>anvier<span class="e">E</span>ric
+        </p>
+      </div>
+    </footer>
   </body>
 </html>
