@@ -42,7 +42,7 @@ module.exports = {
   devtool: "source-map",
   mode: "development",
   devServer: {
-    open: false,
+    open: true,
     static: path.resolve(__dirname, "./dist"),
     watchFiles: ["./src/**"],
     port: 4000,
