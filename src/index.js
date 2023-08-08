@@ -9,7 +9,6 @@ form.addEventListener("submit", (event) => {
   const value = input.value;
   input.value = "";
   addTodo(value);
-  diplayTodo();
 });
 
 const todos = [
@@ -80,6 +79,10 @@ const createTodoElement = (todo, index) => {
   </div>
 </fieldset>
   `;
+  const buttonDelete = li.querySelector(".delete-button");
+  buttonDelete.addEventListener("click", (event) => {
+    deleteTodo(index);
+  });
   return li;
 };
 
@@ -89,6 +92,12 @@ const addTodo = (text) => {
     done: false,
     check: false,
   });
+  diplayTodo();
+};
+
+const deleteTodo = (index) => {
+  todos.splice(index, 1);
+  diplayTodo();
 };
 
 diplayTodo();
