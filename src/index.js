@@ -49,7 +49,7 @@ const todos = [
   },
 ];
 
-const diplayTodo = () => {
+const displayTodo = () => {
   const todosElement = todos.map((todo, index) => {
     return createTodoElement(todo, index);
   });
@@ -64,8 +64,9 @@ const createTodoElement = (todo, index) => {
   <legend class="title-todo">
     Ma tâche n°<span class="number">${index + 1}</span> :
   </legend>
-  <p>
-    <span class="${todo.done ? "done" : "todo"}"></span> 
+  <p class="container-text-todo">
+    <span class="todo">${index + 1}</span> 
+    <span class="${todo.done ? "done" : ""}"></span> 
     <span class="text-todo">${todo.text}</span>
     <span>${
       todo.check
@@ -79,8 +80,13 @@ const createTodoElement = (todo, index) => {
   </div>
 </fieldset>
   `;
-  const buttonDelete = li.querySelector(".delete-button");
-  buttonDelete.addEventListener("click", (event) => {
+  const faRegular = li.querySelector(".fa-regular");
+  faRegular.addEventListener("click", (event) => {
+    toggleTodo(index);
+  });
+  const deleteButton = li.querySelector(".delete-button");
+  deleteButton.addEventListener("click", (event) => {
+    event.stopPropagation();
     deleteTodo(index);
   });
   return li;
@@ -92,12 +98,18 @@ const addTodo = (text) => {
     done: false,
     check: false,
   });
-  diplayTodo();
+  displayTodo();
 };
 
 const deleteTodo = (index) => {
   todos.splice(index, 1);
-  diplayTodo();
+  displayTodo();
 };
 
-diplayTodo();
+const toggleTodo = (index) => {
+  todos[index].done = !todos[index].done;
+  todos[index].check = !todos[index].check;
+  displayTodo();
+};
+
+displayTodo();
