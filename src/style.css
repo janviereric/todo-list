@@ -103,6 +103,11 @@ input {
   display: none;
 }
 
+.container-text-info {
+  margin-left: 0.2rem;
+  margin-top: 0.2rem;
+}
+
 li {
   display: flex;
   flex-direction: column;
@@ -194,14 +199,19 @@ li fieldset {
   font-size: 0.8rem;
 }
 
-.container-edit-text-todo {
+.container-edit-text-todo-input {
   display: flex;
 }
 
-.container-edit-text-todo input {
+.container-edit-text-todo-input input {
   margin-bottom: 0;
   margin-left: 2.5rem;
   margin-right: 0;
+}
+
+.container-edit-text-info {
+  margin-left: 2.7rem;
+  margin-top: 0.1rem;
 }
 
 .container-save-cancel-button {

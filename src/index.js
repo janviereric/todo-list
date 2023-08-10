@@ -88,9 +88,14 @@ const createTodoEditElement = (todo, index) => {
   <legend class="edit-title-todo">
     Ma tâche n°<span class="number">${index + 1}</span> :
   </legend>
-  <div class="container-edit-text-todo">
-    <span class="todo">${index + 1}</span> 
-    <input type="text" />
+  <div class="container-edit-text-todo-input-text-info">
+    <div class="container-edit-text-todo-input">
+      <span class="todo">${index + 1}</span> 
+      <input type="text" />
+    </div>
+    <div class="container-edit-text-info">
+      <small></small>
+    </div>
   </div>
   <div class="container-save-cancel-button">
     <button class="save-button">Sauvegarder</button>
@@ -100,9 +105,18 @@ const createTodoEditElement = (todo, index) => {
   `;
   const input = li.querySelector("input");
   input.value = todo.text;
+  const small = li.querySelector("small");
   const saveButton = li.querySelector(".save-button");
   saveButton.addEventListener("click", (event) => {
-    editTodo(index, input);
+    if (input.value.length > 4 && input.value.length < 76) {
+      small.classList.add("text-info-succes");
+      small.classList.remove("text-info-danger");
+      editTodo(index, input);
+    } else {
+      small.classList.add("text-info-danger");
+      small.classList.remove("text-info-succes");
+      small.innerHTML = "Le champs doit contenir entre 5 et 75 caractères";
+    }
   });
   const cancelButton = li.querySelector(".cancel-button");
   cancelButton.addEventListener("click", (event) => {
