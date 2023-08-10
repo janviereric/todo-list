@@ -2,7 +2,7 @@ import "./style.css";
 
 const ul = document.querySelector("ul");
 const form = document.querySelector("form");
-const input = document.querySelector("form > input");
+const input = document.querySelector(".input-todo");
 
 form.addEventListener("submit", (event) => {
   event.preventDefault();
@@ -114,13 +114,20 @@ const createTodoEditElement = (todo, index) => {
 
 const addTodo = (text) => {
   text = text.trim();
-  if (text) {
+  const small = document.querySelector("small");
+  if (text.length > 4 && text.length < 76) {
+    small.classList.add("text-info-succes");
+    small.classList.remove("text-info-danger");
     todos.push({
       text,
       done: false,
       check: false,
     });
     displayTodo();
+  } else {
+    small.classList.add("text-info-danger");
+    small.classList.remove("text-info-succes");
+    small.innerHTML = "Le champs doit contenir entre 5 et 75 caractères";
   }
 };
 

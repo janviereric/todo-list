@@ -76,9 +76,13 @@ legend {
 
 form {
   display: flex;
-  justify-content: space-around;
+  flex-direction: column;
   margin-top: 1rem;
   margin-bottom: 3rem;
+}
+
+.container-input-button {
+  display: flex;
 }
 
 input {
@@ -88,6 +92,15 @@ input {
   border: 0.1rem solid #979393;
   border-radius: 0.2rem;
   flex: 1;
+}
+
+.text-info-danger {
+  color: #d63031;
+  font-weight: bold;
+}
+
+.text-info-succes {
+  display: none;
 }
 
 li {
