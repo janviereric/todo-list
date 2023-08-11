@@ -133,7 +133,7 @@ const addTodo = (text) => {
     small.classList.add("text-info-succes");
     small.classList.remove("text-info-danger");
     todos.push({
-      text,
+      text: `${text[0].toUpperCase()}${text.slice(1)}`,
       done: false,
       check: false,
     });
