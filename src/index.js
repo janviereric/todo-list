@@ -11,16 +11,41 @@ form.addEventListener("submit", (event) => {
   addTodo(value);
 });
 
+const addTodo = (text) => {
+  text = text.trim();
+  const small = document.querySelector("small");
+  if (text.length > 4 && text.length < 101) {
+    small.classList.add("text-info-none");
+    small.classList.remove("text-info-danger");
+    todos.push({
+      text: `${text[0].toUpperCase()}${text.slice(1)}`,
+      done: false,
+      check: false,
+    });
+    displayTodo();
+  } else {
+    small.classList.add("text-info-danger");
+    small.classList.remove("text-info-none");
+    small.innerHTML = "Le champs doit contenir entre 5 et 100 caractères";
+    setTimeout(() => {
+      small.classList.remove("text-info-danger");
+      small.classList.add("text-info-none");
+    }, 10000);
+  }
+};
+
 const todos = [
   {
     text: "Je suis la Todo numéros 1",
     done: false,
+    effect: false,
     check: false,
     editMode: false,
   },
   {
     text: "Je suis la Todo numéros 2",
     done: false,
+    effect: false,
     check: false,
     editMode: false,
   },
@@ -50,7 +75,7 @@ const createTodoElement = (todo, index) => {
     todo.done ? "ok" : index + 1
   }</span> 
     <div class="container-text-todo">
-      <p class="text-todo">${todo.text}</p>
+      <p class="text-todo ${todo.effect ? "effect" : ""}">${todo.text}</p>
     </div>
     <span>${
       todo.check
@@ -64,10 +89,6 @@ const createTodoElement = (todo, index) => {
   </div>
 </fieldset>
   `;
-  const faRegular = li.querySelector(".fa-regular");
-  faRegular.addEventListener("click", (event) => {
-    toggleTodo(index);
-  });
   const editButton = li.querySelector(".edit-button");
   editButton.addEventListener("click", (event) => {
     event.stopPropagation();
@@ -77,6 +98,10 @@ const createTodoElement = (todo, index) => {
   deleteButton.addEventListener("click", (event) => {
     event.stopPropagation();
     deleteTodo(index);
+  });
+  const faRegular = li.querySelector(".fa-regular");
+  faRegular.addEventListener("click", (event) => {
+    toggleTodo(index);
   });
   return li;
 };
@@ -108,14 +133,35 @@ const createTodoEditElement = (todo, index) => {
   const small = li.querySelector("small");
   const saveButton = li.querySelector(".save-button");
   saveButton.addEventListener("click", (event) => {
-    if (input.value.length > 4 && input.value.length < 76) {
-      small.classList.add("text-info-succes");
+    if (input.value.length > 4 && input.value.length < 101) {
+      small.classList.add("text-info-none");
       small.classList.remove("text-info-danger");
-      editTodo(index, input);
+      if (input.value != todo.text) {
+        small.classList.add("text-info-succes");
+        small.classList.remove("text-info-none");
+        small.innerHTML =
+          "Sauvegarde en cours : La mise à jour de la todo a réussit, merci de patienter quelque seconde svp et ne pas appuyer sur le bouton 'Annuler' pour que la mise à jour soit prise en compte.";
+        setTimeout(() => {
+          editTodo(index, input);
+        }, 10000);
+      } else {
+        small.classList.add("text-info-danger");
+        small.classList.remove("text-info-none");
+        small.innerHTML =
+          "Annulation en cours : La mise à jour de la todo a échoué car la Todo n'a pas été modifié, merci de modifier la Todo ou d'appuyer sur le bouton 'Annuler'.";
+        setTimeout(() => {
+          todos[index].editMode = false;
+          displayTodo();
+        }, 2000);
+      }
     } else {
       small.classList.add("text-info-danger");
-      small.classList.remove("text-info-succes");
-      small.innerHTML = "Le champs doit contenir entre 5 et 75 caractères";
+      small.classList.remove("text-info-none");
+      small.innerHTML = "Le champs doit contenir entre 5 et 100 caractères";
+      setTimeout(() => {
+        small.classList.remove("text-info-danger");
+        small.classList.add("text-info-none");
+      }, 10000);
     }
   });
   const cancelButton = li.querySelector(".cancel-button");
@@ -126,33 +172,15 @@ const createTodoEditElement = (todo, index) => {
   return li;
 };
 
-const addTodo = (text) => {
-  text = text.trim();
-  const small = document.querySelector("small");
-  if (text.length > 4 && text.length < 76) {
-    small.classList.add("text-info-succes");
-    small.classList.remove("text-info-danger");
-    todos.push({
-      text: `${text[0].toUpperCase()}${text.slice(1)}`,
-      done: false,
-      check: false,
-    });
-    displayTodo();
-  } else {
-    small.classList.add("text-info-danger");
-    small.classList.remove("text-info-succes");
-    small.innerHTML = "Le champs doit contenir entre 5 et 75 caractères";
-  }
+const toggleTodo = (index) => {
+  todos[index].done = !todos[index].done;
+  todos[index].effect = !todos[index].effect;
+  todos[index].check = !todos[index].check;
+  displayTodo();
 };
 
 const deleteTodo = (index) => {
   todos.splice(index, 1);
-  displayTodo();
-};
-
-const toggleTodo = (index) => {
-  todos[index].done = !todos[index].done;
-  todos[index].check = !todos[index].check;
   displayTodo();
 };
 
@@ -164,6 +192,9 @@ const toggleEditMode = (index) => {
 const editTodo = (index, input) => {
   const value = input.value;
   todos[index].text = value;
+  todos[index].done = false;
+  todos[index].effect = false;
+  todos[index].check = false;
   todos[index].editMode = false;
   displayTodo();
 };
