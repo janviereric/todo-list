@@ -137,22 +137,10 @@ const createTodoEditElement = (todo, index) => {
       small.classList.add("text-info-none");
       small.classList.remove("text-info-danger");
       if (input.value != todo.text) {
-        small.classList.add("text-info-succes");
-        small.classList.remove("text-info-none");
-        small.innerHTML =
-          "Sauvegarde en cours : La mise à jour de la todo a réussit, merci de patienter quelque seconde svp et ne pas appuyer sur le bouton 'Annuler' pour que la mise à jour soit prise en compte.";
-        setTimeout(() => {
-          editTodo(index, input);
-        }, 10000);
+        editTodo(index, input);
       } else {
-        small.classList.add("text-info-danger");
-        small.classList.remove("text-info-none");
-        small.innerHTML =
-          "Annulation en cours : La mise à jour de la todo a échoué car la Todo n'a pas été modifié, merci de modifier la Todo ou d'appuyer sur le bouton 'Annuler'.";
-        setTimeout(() => {
-          todos[index].editMode = false;
-          displayTodo();
-        }, 2000);
+        todos[index].editMode = false;
+        displayTodo();
       }
     } else {
       small.classList.add("text-info-danger");
