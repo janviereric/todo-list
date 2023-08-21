@@ -2,7 +2,7 @@ import "./style.css";
 
 const ul = document.querySelector("ul");
 const form = document.querySelector("form");
-const input = document.querySelector(".input-todo");
+const input = document.querySelector("#input-todo");
 
 form.addEventListener("submit", (event) => {
   event.preventDefault();
@@ -13,7 +13,7 @@ form.addEventListener("submit", (event) => {
 
 const addTodo = (text) => {
   text = text.trim();
-  const textInfoRule = document.querySelector(".text-info-rule");
+  const textInfoRule = document.querySelector("#text-info-input");
   if (text.length > 4 && text.length < 101) {
     textInfoRule.classList.remove("invalid");
     textInfoRule.classList.add("invisible");
@@ -103,8 +103,8 @@ const createTodoElement = (todo, index) => {
         </div>
         <span>${
           todo.check
-            ? "<i class='fa-regular fa-square-check'></i>"
-            : "<i class='fa-regular fa-square'></i>"
+            ? "<i id='check-button' class='fa-regular fa-square-check'></i>"
+            : "<i id='check-button' class='fa-regular fa-square'></i>"
         }</span>
       </div>
       <div class="container-text-info">
@@ -128,24 +128,24 @@ const createTodoElement = (todo, index) => {
           todo.cancel ? "Modification en cours annulé." : ""
         }</small>
       </div>
-      <div class="container-edit-delete-button">
-        <button class="edit-button">Editer</button>
-        <button class="delete-button">Supprimer</button>
+      <div class="container-button">
+        <button id="edit-button" class="button">Editer</button>
+        <button id="delete-button" class="button">Supprimer</button>
       </div>
     </fieldset>
   `;
-  const editButton = li.querySelector(".edit-button");
+  const editButton = li.querySelector("#edit-button");
   editButton.addEventListener("click", (event) => {
     event.stopPropagation();
     toggleEditMode(index);
   });
-  const deleteButton = li.querySelector(".delete-button");
+  const deleteButton = li.querySelector("#delete-button");
   deleteButton.addEventListener("click", (event) => {
     event.stopPropagation();
     deleteTodo(index);
   });
-  const faRegular = li.querySelector(".fa-regular");
-  faRegular.addEventListener("click", (event) => {
+  const checkButton = li.querySelector("#check-button");
+  checkButton.addEventListener("click", (event) => {
     event.stopPropagation();
     toggleTodo(index);
   });
@@ -224,21 +224,24 @@ const createTodoEditElement = (todo, index) => {
       <span class="todo">${index + 1}</span> 
       <input type="text" />
     </div>
-    <div class="container-text-info-edit">
-      <small class="text-info-rule-edit"></small>
+    <div
+    <div class="container-text-info-input">
+      <small class="text-info-input"></small>
+    </div>
+    <div class="container-text-info">
       <small id="text-info-warning" class="invisible">${
         todo.warning ? "Veuillez modifier la Todo ou 'Annuler'." : ""
       }</small>
     </div>
-    <div class="container-save-cancel-button">
-      <button class="save-button">Sauvegarder</button>
-      <button class="cancel-button">Annuler</button>
+    <div class="container-button">
+      <button id="save-button" class="button">Sauvegarder</button>
+      <button id="cancel-button" class="button">Annuler</button>
     </div>
   </fieldset>
   `;
   const input = li.querySelector("input");
   input.value = todo.text;
-  const saveButton = li.querySelector(".save-button");
+  const saveButton = li.querySelector("#save-button");
   saveButton.addEventListener("click", (event) => {
     if (input.value.length > 4 && input.value.length < 101) {
       if (input.value != todo.text) {
@@ -253,7 +256,7 @@ const createTodoEditElement = (todo, index) => {
         }, 2000);
       }
     } else {
-      const textInfoRuleEditMode = li.querySelector(".text-info-rule-edit");
+      const textInfoRuleEditMode = li.querySelector("#text-info-input");
       textInfoRuleEditMode.classList.remove("invisible");
       textInfoRuleEditMode.classList.add("invalid");
       textInfoRuleEditMode.innerHTML =
@@ -264,7 +267,7 @@ const createTodoEditElement = (todo, index) => {
       }, 3000);
     }
   });
-  const cancelButton = li.querySelector(".cancel-button");
+  const cancelButton = li.querySelector("#cancel-button");
   cancelButton.addEventListener("click", (event) => {
     toggleEditMode(index);
   });
