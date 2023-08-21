@@ -1,4 +1,3 @@
-/* reset start */
 * {
   margin: 0;
   padding: 0;
@@ -11,11 +10,6 @@
 a {
   text-decoration: none;
 }
-
-li {
-  list-style-type: none;
-}
-/* reset end */
 
 /* body start */
 body {
@@ -104,30 +98,13 @@ input {
   flex: 1;
 }
 
-.text-info-danger {
-  color: #d63031;
-  font-weight: bold;
-}
-
-.text-info-none {
-  display: none;
-}
-
-.text-info-succes {
-  color: green;
-  font-weight: bold;
-}
-
-.container-text-info {
-  margin-left: 0.2rem;
-  margin-top: 0.2rem;
-}
-
 li {
+  list-style-type: none;
   display: flex;
   flex-direction: column;
   justify-content: center;
   align-items: center;
+  margin-bottom: 1rem;
 }
 
 li fieldset {
@@ -239,11 +216,6 @@ li fieldset {
   margin-right: 0;
 }
 
-.container-edit-text-info {
-  margin-left: 2.7rem;
-  margin-top: 0.1rem;
-}
-
 .container-save-cancel-button {
   display: flex;
   justify-content: space-evenly;
@@ -314,6 +286,46 @@ li fieldset {
   cursor: pointer;
 }
 /* button end */
+
+/* small start */
+.container-text-info-rule {
+  margin-left: 0.2rem;
+  margin-top: 0.2rem;
+}
+
+.container-text-info {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.container-text-info-edit {
+  /* margin-left: 2.7rem; */
+  margin-top: 0.5rem;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.invalid {
+  color: #d63031;
+  font-weight: bold;
+}
+
+.invisible {
+  display: none;
+}
+
+.valid {
+  color: green;
+  font-weight: bold;
+}
+
+.emojis {
+  font-size: 1rem;
+  color: #4d4d4d;
+}
+/* small end */
 
 /* footer start */
 footer {
