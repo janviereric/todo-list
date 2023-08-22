@@ -30,6 +30,8 @@ const addTodo = (text) => {
       update: false,
       warning: false,
       cancel: false,
+      deleteMode: false,
+      delete: false,
     });
     displayTodo();
   } else {
@@ -58,6 +60,8 @@ const todos = [
     update: false,
     warning: false,
     cancel: false,
+    deleteMode: false,
+    delete: false,
   },
   {
     text: "Je suis la Todo numéros 2",
@@ -72,15 +76,21 @@ const todos = [
     update: false,
     warning: false,
     cancel: false,
+    deleteMode: false,
+    delete: false,
   },
 ];
 
 const displayTodo = () => {
   const todosElement = todos.map((todo, index) => {
-    if (todo.editMode) {
-      return createTodoEditElement(todo, index);
+    if (!todo.editMode) {
+      if (todo.deleteMode) {
+        return deleteTodoElement(todo, index);
+      } else {
+        return createTodoElement(todo, index);
+      }
     } else {
-      return createTodoElement(todo, index);
+      return createTodoEditElement(todo, index);
     }
   });
   ul.innerHTML = "";
@@ -127,6 +137,9 @@ const createTodoElement = (todo, index) => {
         <small id="text-info-cancel" class="invisible">${
           todo.cancel ? "Modification en cours annulé." : ""
         }</small>
+        <small id="text-info-delete" class="invisible">${
+          todo.delete ? "Suppression en cours annulé." : ""
+        }</small>
       </div>
       <div class="container-button">
         <button id="edit-button" class="button">Editer</button>
@@ -142,7 +155,7 @@ const createTodoElement = (todo, index) => {
   const deleteButton = li.querySelector("#delete-button");
   deleteButton.addEventListener("click", (event) => {
     event.stopPropagation();
-    deleteTodo(index);
+    toggleDeleteMode(index);
   });
   const checkButton = li.querySelector("#check-button");
   checkButton.addEventListener("click", (event) => {
@@ -155,6 +168,7 @@ const createTodoElement = (todo, index) => {
   const textInfoFailure = li.querySelector("#text-info-failure");
   const textInfoUpdate = li.querySelector("#text-info-update");
   const textInfoCancel = li.querySelector("#text-info-cancel");
+  const textInfoDelete = li.querySelector("#text-info-delete");
 
   if (todo.add) {
     textInfoAdd.classList.add("valid");
@@ -210,6 +224,18 @@ const createTodoElement = (todo, index) => {
       }, 2000);
     }
   }
+
+  if (!todo.deleteMode) {
+    if (todo.delete) {
+      todo.delete = false;
+      textInfoDelete.classList.add("info");
+      textInfoDelete.classList.remove("invisible");
+      setTimeout(() => {
+        textInfoDelete.classList.remove("invalid");
+        textInfoDelete.classList.add("info");
+      }, 2000);
+    }
+  }
   return li;
 };
 
@@ -217,7 +243,7 @@ const createTodoEditElement = (todo, index) => {
   const li = document.createElement("li");
   li.innerHTML = `
   <fieldset>
-    <legend class="edit-title-todo">
+    <legend >
       Ma tâche n°<span class="number">${index + 1}</span> :
     </legend>
     <div class="container-edit-text-todo-input">
@@ -230,7 +256,9 @@ const createTodoEditElement = (todo, index) => {
     </div>
     <div class="container-text-info">
       <small id="text-info-warning" class="invisible">${
-        todo.warning ? "Veuillez modifier la Todo ou 'Annuler'." : ""
+        todo.warning
+          ? "Veuillez modifier la Todo ou <span class='invalid'>Annuler</span>."
+          : ""
       }</small>
     </div>
     <div class="container-button">
@@ -248,10 +276,10 @@ const createTodoEditElement = (todo, index) => {
         editTodo(index, input);
       } else {
         const textInfoWarning = li.querySelector("#text-info-warning");
-        textInfoWarning.classList.add("invalid");
+        textInfoWarning.classList.add("info");
         textInfoWarning.classList.remove("invisible");
         setTimeout(() => {
-          textInfoWarning.classList.remove("invalid");
+          textInfoWarning.classList.remove("info");
           textInfoWarning.classList.add("invisible");
         }, 2000);
       }
@@ -274,17 +302,43 @@ const createTodoEditElement = (todo, index) => {
   return li;
 };
 
+const deleteTodoElement = (todo, index) => {
+  const li = document.createElement("li");
+  li.innerHTML = `<fieldset>
+  <legend>
+    Ma tâche n°<span class="number">${index + 1}</span> :
+  </legend>
+  <div class="container-delete-question">
+    <p class="delete-question">Êtes-vous sûr de vouloir <span class="invalid">supprimer</span> la <strong>Todo</strong> n°<span class="number">${
+      index + 1
+    }</span> ? </p>
+  </div>
+  <div
+  <div class="container-button">
+    <button id="yes-button" class="button">Oui</button>
+    <button id="no-button" class="button">Non</button>
+  </div>
+</fieldset>`;
+
+  const yesButton = li.querySelector("#yes-button");
+  yesButton.addEventListener("click", (event) => {
+    event.stopPropagation();
+    deleteTodo(index);
+  });
+  const noButton = li.querySelector("#no-button");
+  noButton.addEventListener("click", (event) => {
+    event.stopPropagation();
+    toggleDeleteMode(index);
+  });
+  return li;
+};
+
 const toggleTodo = (index) => {
   todos[index].done = !todos[index].done;
   todos[index].effect = !todos[index].effect;
   todos[index].check = !todos[index].check;
   todos[index].success = !todos[index].success;
   todos[index].failure = !todos[index].failure;
-  displayTodo();
-};
-
-const deleteTodo = (index) => {
-  todos.splice(index, 1);
   displayTodo();
 };
 
@@ -299,6 +353,12 @@ const toggleEditMode = (index) => {
   displayTodo();
 };
 
+const toggleDeleteMode = (index) => {
+  todos[index].deleteMode = !todos[index].deleteMode;
+  todos[index].delete = true;
+  displayTodo();
+};
+
 const editTodo = (index, input) => {
   const value = input.value;
   todos[index].text = value;
@@ -306,6 +366,11 @@ const editTodo = (index, input) => {
   todos[index].effect = false;
   todos[index].check = false;
   todos[index].editMode = false;
+  displayTodo();
+};
+
+const deleteTodo = (index) => {
+  todos.splice(index, 1);
   displayTodo();
 };
 

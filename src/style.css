@@ -220,12 +220,14 @@ li fieldset {
 }
 
 #edit-button,
-#save-button {
+#save-button,
+#no-button {
   background-color: #4a69bd;
 }
 
 #delete-button,
-#cancel-button {
+#cancel-button,
+#yes-button {
   background-color: #e84118;
 }
 
@@ -255,6 +257,12 @@ li fieldset {
   align-items: center;
 }
 
+.container-delete-question {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
 .invalid {
   color: #d63031;
   font-weight: bold;
@@ -273,6 +281,16 @@ li fieldset {
   font-size: 1rem;
   color: #4d4d4d;
 }
+
+.delete-question {
+  font-size: 0.65rem;
+}
+
+.info {
+  color: #4a69bd;
+  font-weight: bold;
+}
+
 /* main end*/
 
 /* footer start */
