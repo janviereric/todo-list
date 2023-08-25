@@ -1,8 +1,20 @@
 import "./style.css";
 
-const ul = document.querySelector("ul");
+const reverseButton = document.querySelector("#reverse-button");
 const form = document.querySelector("form");
 const input = document.querySelector("#input-todo");
+const ul = document.querySelector("ul");
+
+let reverseMode = false;
+reverseButton.addEventListener("click", (event) => {
+  event.stopPropagation();
+  reverseButton.innerHTML = `Ma Liste de tâches ${
+    reverseMode
+      ? "<i class='fa-solid fa-arrow-down-1-9 fa-reverse'></i>"
+      : "<i class='fa-solid fa-arrow-down-9-1 fa-reverse'></i>"
+  }`;
+  toggleReverse();
+});
 
 form.addEventListener("submit", (event) => {
   event.preventDefault();
@@ -93,8 +105,14 @@ const displayTodo = () => {
       return createTodoEditElement(todo, index);
     }
   });
-  ul.innerHTML = "";
-  ul.append(...todosElement);
+  if (reverseMode) {
+    ul.innerHTML = "";
+    todosElement.reverse();
+    ul.append(...todosElement);
+  } else {
+    ul.innerHTML = "";
+    ul.append(...todosElement);
+  }
 };
 
 const createTodoElement = (todo, index) => {
@@ -331,6 +349,11 @@ const deleteTodoElement = (todo, index) => {
     toggleDeleteMode(index);
   });
   return li;
+};
+
+const toggleReverse = () => {
+  reverseMode = !reverseMode;
+  displayTodo();
 };
 
 const toggleTodo = (index) => {

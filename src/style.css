@@ -64,7 +64,7 @@ legend {
   padding: 1rem;
 }
 
-.title-todo-list {
+#reverse-button {
   font-size: 1.2rem;
   font-weight: bold;
   color: #f5f6fa;
@@ -72,17 +72,25 @@ legend {
   border-radius: 0.2rem;
   padding-top: 0.2rem;
   padding-bottom: 0.2rem;
+  cursor: pointer;
+  transition: all 0.2s;
+}
+
+#reverse-button:hover {
+  transition: all 0.2s;
+  background-color: #c8d6e5;
+  color: black;
 }
 
 form {
   display: flex;
   flex-direction: column;
-  margin-top: 1rem;
-  margin-bottom: 3rem;
 }
 
 .container-input-button {
   display: flex;
+  margin-top: 2rem;
+  margin-bottom: 2rem;
 }
 
 input {
