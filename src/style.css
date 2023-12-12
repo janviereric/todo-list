@@ -304,9 +304,10 @@ li fieldset {
 /* footer start */
 footer {
   height: 8rem;
-  background-color: #4d4d4d;
+  background-color: #7f8c8d;
   color: #f5f6fa;
   font-size: 0.7rem;
+  font-weight: bold;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -319,10 +320,12 @@ img {
 }
 
 .j {
-  font-family: "Roboto Condensed", sans-seri;
+  font-family: "Roboto Condensed", sans-serif;
+  color: black;
 }
 
 .e {
-  font-family: "Roboto Condensed", sans-seri;
+  font-family: "Roboto Condensed", sans-serif;
+  color: black;
 }
 /* footer end */

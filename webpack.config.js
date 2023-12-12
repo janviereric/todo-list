@@ -29,7 +29,7 @@ module.exports = {
     new CopyWebpackPlugin({
       patterns: [
         {
-          from: "./src/img/*",
+          from: "./src/images/*",
           to: "./",
         },
       ],

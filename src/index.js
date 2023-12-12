@@ -181,6 +181,14 @@ const createTodoElement = (todo, index) => {
     toggleTodo(index);
   });
 
+  const containerDoneTextTodoCheck = li.querySelector(
+    ".container-done-text-todo-check"
+  );
+  containerDoneTextTodoCheck.addEventListener("dblclick", (event) => {
+    event.stopPropagation();
+    toggleEditMode(index);
+  });
+
   const textInfoAdd = li.querySelector("#text-info-add");
   const textInfoSuccess = li.querySelector("#text-info-success");
   const textInfoFailure = li.querySelector("#text-info-failure");
@@ -270,7 +278,7 @@ const createTodoEditElement = (todo, index) => {
     </div>
     <div
     <div class="container-text-info-input">
-      <small class="text-info-input"></small>
+      <small id="text-info-input"></small>
     </div>
     <div class="container-text-info">
       <small id="text-info-warning" class="invisible">${
